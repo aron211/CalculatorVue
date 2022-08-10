@@ -6,14 +6,16 @@
          <th >Numero 1</th>
          <th >Numero 2</th>
          <th >Resultado</th>
+         
       </tr>
    </thead>
-   <tbody>
-      <tr >
-         <td>1</td>
-         <td>2</td>
-         <td>3</td>
-         <td>5</td>
+   <tbody v-for="item in selectedS" :value="item" :key="item.id">
+      <tr>
+         <th>{{item.ope}}</th>
+         <th>{{item.num1}}</th>
+         <th>{{item.num2}}</th>
+         <th>{{item.res}}</th>
+         
       </tr>
    </tbody>
 </table>
@@ -22,15 +24,17 @@
 <script>
 export default{
 name: 'ComponentTable',
+props:{
+   selectedS:[]
+}
 }
 </script>
 
 <style>
-table {
-    width: 50%;
-    margin-top: 50px;
-    margin-left: 25%;
-    margin-right: 25%;
+table {  
+ width: fit-content;
+ margin-top:  10px;
+
 }
 
 tbody{
