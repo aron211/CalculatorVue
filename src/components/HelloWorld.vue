@@ -1,58 +1,105 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    
+    <label for="">Numero 1   </label>
+    <input type="Number" v-model="nro1" placeholder="Indique el Numero 1">
+    <br><br><br>
+    
+    <label for="">Numero 2   </label>
+    <input type="Number" v-model="nro2" placeholder="Indique el Numero 2">
+    <br><br><br>
+    
+    <label for="">Operacion   </label>
+    <select v-model="selected">
+      <option  v-for="item in operations" :value="item" :key="item.id">
+        {{ item.name }}
+      </option>
+    </select>
+    <br><br><br>
+    
+    <button @click="calcular()">Calcular</button>
+    <br><br>
+    
+    <label >Resultado    </label>
+    <input type="Number" v-model="result" placeholder="El resultado es" disabled>
+
+
+
   </div>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
+  data: () => ({
+    nro1: " ",
+    nro2: " ",
+    result: " ",
+    operations: [
+      {id: 1, name: 'Suma'},
+      {id: 2, name: 'Resta'},
+      {id: 3, name: 'Multiplicacion' },
+      {id: 4, name: 'Division' }
+    ],
+    table: '',
+  }),
   props: {
     msg: String
+  },
+  methods: {
+    calcular(){
+      if(this.selected.id === 1){
+        this.result= Number(this.nro1) + Number(this.nro2)
+      }
+      else
+      {
+        if (this.selected.id === 2){
+          this.result= Number(this.nro1) - Number(this.nro2)
+        }
+        else{
+          if (this.selected.id === 3){
+            this.result= Number(this.nro1) * Number(this.nro2)
+          }
+          else 
+          this.result= Number(this.nro1) / Number(this.nro2)
+      } 
+      }      
+    }
   }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style>
+
+input, select{
+  width: 150px;
+  height: 40px;
+  background-color: rgb(219, 245, 232);
+  box-sizing: border-box;
+  border: 2px solid rgb(21, 241, 113);
+  border-radius: 4px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+button{
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    border-color: rgb(9, 243, 141);
+    text-align: center;
+    transition-duration: 0.5s;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+button:hover{
+    background-color: #4CAF50; /* Green */
+    color: white;
+    
 }
-a {
-  color: #42b983;
+
+label{
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    color: rgb(2, 31, 11);
+    text-decoration: solid;
 }
 </style>
